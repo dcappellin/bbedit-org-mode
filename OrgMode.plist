@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+    Org Mode - BBEdit Codeless Language Module
+    Syntax highlighting for Emacs Org mode files (.org)
+    
+    Supports:
+    - Headings (* ** *** etc.)
+    - TODO/DONE keywords
+    - Text markup (*bold*, /italic/, _underline_, =verbatim=, ~code~, +strikethrough+)
+    - Links [[link]] and [[link][description]]
+    - Comments (# comment)
+    - File keywords (#+TITLE:, #+BEGIN_SRC, etc.)
+    - Property drawers (:PROPERTIES:, :END:)
+    - Timestamps [2024-01-01] and <2024-01-01>
+    - Code blocks
+    - Tables
+    
+    Author: Created with Claude (Anthropic)
+    Sources: 
+    - https://orgmode.org/worg/org-syntax.html
+    - https://www.barebones.com/support/develop/clm.html
+-->
+<dict>
+    <!-- Required: Identify this as a Codeless Language Module -->
+    <key>BBEditDocumentType</key>
+    <string>CodelessLanguageModule</string>
+    
+    <!-- Required: Display name in BBEdit menus -->
+    <key>BBLMLanguageDisplayName</key>
+    <string>Org Mode</string>
+    
+    <!-- Required: Unique 4-character code -->
+    <key>BBLMLanguageCode</key>
+    <string>OrgM</string>
+    
+    <!-- File extension mapping -->
+    <key>BBLMSuffixMap</key>
+    <array>
+        <dict>
+            <key>BBLMLanguageSuffix</key>
+            <string>.org</string>
+        </dict>
+    </array>
+    
+    <!-- Preferred extension when saving -->
+    <key>BBLMPreferredFilenameExtension</key>
+    <string>org</string>
+    
+    <!-- Enable syntax coloring -->
+    <key>BBLMColorsSyntax</key>
+    <true/>
+    
+    <!-- Enable function scanning for headings -->
+    <key>BBLMScansFunctions</key>
+    <true/>
+    
+    <!-- Case insensitive for keywords like TODO, DONE -->
+    <key>BBLMIsCaseSensitive</key>
+    <false/>
+    
+    <!-- Spell check prose (Org is mostly text) -->
+    <key>BBLMCanSpellCheckCodeRuns</key>
+    <true/>
+    
+    <!-- Comment token for Un/Comment Selection -->
+    <key>BBLMCommentLineDefault</key>
+    <string># </string>
+    
+    <!-- Keywords: TODO states, priorities, and common Org keywords -->
+    <key>BBLMKeywordList</key>
+    <array>
+        <!-- TODO states -->
+        <string>TODO</string>
+        <string>DONE</string>
+        <string>WAITING</string>
+        <string>CANCELLED</string>
+        <string>CANCELED</string>
+        <string>NEXT</string>
+        <string>HOLD</string>
+        <string>SOMEDAY</string>
+        <string>PROJECT</string>
+        <!-- Timestamps and scheduling -->
+        <string>SCHEDULED</string>
+        <string>DEADLINE</string>
+        <string>CLOSED</string>
+        <string>CLOCK</string>
+        <!-- Property keywords -->
+        <string>PROPERTIES</string>
+        <string>END</string>
+        <string>LOGBOOK</string>
+        <!-- Priorities -->
+        <string>[#A]</string>
+        <string>[#B]</string>
+        <string>[#C]</string>
+    </array>
+    
+    <!-- Predefined names: file keywords and block delimiters -->
+    <key>BBLMPredefinedNameList</key>
+    <array>
+        <!-- File-level keywords -->
+        <string>#+TITLE:</string>
+        <string>#+AUTHOR:</string>
+        <string>#+DATE:</string>
+        <string>#+EMAIL:</string>
+        <string>#+DESCRIPTION:</string>
+        <string>#+KEYWORDS:</string>
+        <string>#+LANGUAGE:</string>
+        <string>#+OPTIONS:</string>
+        <string>#+PROPERTY:</string>
+        <string>#+STARTUP:</string>
+        <string>#+FILETAGS:</string>
+        <string>#+CATEGORY:</string>
+        <string>#+SETUPFILE:</string>
+        <string>#+INCLUDE:</string>
+        <string>#+BIND:</string>
+        <string>#+MACRO:</string>
+        <string>#+LINK:</string>
+        <string>#+TODO:</string>
+        <string>#+SEQ_TODO:</string>
+        <string>#+TYP_TODO:</string>
+        <string>#+PRIORITIES:</string>
+        <string>#+TAGS:</string>
+        <string>#+ARCHIVE:</string>
+        <string>#+COLUMNS:</string>
+        <!-- Results and names -->
+        <string>#+NAME:</string>
+        <string>#+RESULTS:</string>
+        <string>#+CAPTION:</string>
+        <string>#+ATTR_HTML:</string>
+        <string>#+ATTR_LATEX:</string>
+        <string>#+ATTR_ORG:</string>
+        <string>#+HEADER:</string>
+        <string>#+HEADERS:</string>
+        <!-- Export settings -->
+        <string>#+LATEX_CLASS:</string>
+        <string>#+LATEX_CLASS_OPTIONS:</string>
+        <string>#+LATEX_HEADER:</string>
+        <string>#+HTML_HEAD:</string>
+        <string>#+HTML_HEAD_EXTRA:</string>
+        <!-- Block delimiters -->
+        <string>#+BEGIN_SRC</string>
+        <string>#+END_SRC</string>
+        <string>#+BEGIN_EXAMPLE</string>
+        <string>#+END_EXAMPLE</string>
+        <string>#+BEGIN_QUOTE</string>
+        <string>#+END_QUOTE</string>
+        <string>#+BEGIN_VERSE</string>
+        <string>#+END_VERSE</string>
+        <string>#+BEGIN_CENTER</string>
+        <string>#+END_CENTER</string>
+        <string>#+BEGIN_COMMENT</string>
+        <string>#+END_COMMENT</string>
+        <string>#+BEGIN_EXPORT</string>
+        <string>#+END_EXPORT</string>
+        <string>#+BEGIN_NOTES</string>
+        <string>#+END_NOTES</string>
+        <!-- Call -->
+        <string>#+CALL:</string>
+        <string>#+TBLFM:</string>
+    </array>
+    
+    <!-- Language features dictionary -->
+    <key>Language Features</key>
+    <dict>
+        <!-- Characters allowed in identifiers/keywords -->
+        <key>Identifier and Keyword Character Class</key>
+        <string>A-Za-z0-9_#:+\-\[\]@</string>
+        
+        <!-- Line comments start with # at beginning of line -->
+        <key>Open Line Comments</key>
+        <string>#</string>
+        
+        <!-- Block comments -->
+        <key>Open Block Comments</key>
+        <string>#+BEGIN_COMMENT</string>
+        <key>Close Block Comments</key>
+        <string>#+END_COMMENT</string>
+        
+        <!-- String patterns using regular expressions for better matching -->
+        <key>String Pattern</key>
+        <string><![CDATA[
+(?x:
+    (\[\[[^\]]+\]\])                           |  (?# Links [[...]] or [[...][...]])
+    (\<[0-9]{4}-[0-9]{2}-[0-9]{2}[^\>]*\>)     |  (?# Active timestamps <2024-01-01>)
+    (\[[0-9]{4}-[0-9]{2}-[0-9]{2}[^\]]*\])     |  (?# Inactive timestamps [2024-01-01])
+    ((?<=\s|^)=[^\s=][^=]*=(?=\s|$|[.,;:!?]))  |  (?# Verbatim =text=)
+    ((?<=\s|^)~[^\s~][^~]*~(?=\s|$|[.,;:!?]))     (?# Code ~text~)
+)
+]]></string>
+        
+        <!-- Comment pattern -->
+        <key>Comment Pattern</key>
+        <string><![CDATA[
+(?x:
+    (^\#\s.*$)                                       |  (?# Line comments starting with #)
+    (^\#\+BEGIN_COMMENT\b[\s\S]*?^\#\+END_COMMENT)   |  (?# Block comments)
+    (:PROPERTIES:[\s\S]*?:END:)                         (?# Property drawers as "comments")
+)
+]]></string>
+        
+        <!-- Function pattern to recognize headings for navigation -->
+        <key>Function Pattern</key>
+        <string><![CDATA[
+(?x:
+    (?P<function>
+        ^(?P<function_name>\*+\s+.+)$
+    )
+)
+]]></string>
+        
+        <!-- Skip pattern to avoid false matches in strings/comments -->
+        <key>Skip Pattern</key>
+        <string><![CDATA[
+(?x:
+    (?P>comment)  |
+    (?P>string)
+)
+]]></string>
+        
+    </dict>
+    
+</dict>
+</plist>
