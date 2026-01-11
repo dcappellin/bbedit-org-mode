@@ -66,15 +66,37 @@ Once installed, BBEdit will automatically recognize files with the `.org` extens
 
 ## Limitations
 
-This is a syntax highlighting module only. It does not provide:
+This is a **Codeless Language Module**, which has inherent limitations compared to compiled BBEdit language modules (`.bblm`). Through testing, we found that:
 
-- Folding/unfolding of headings (BBEdit CLMs don't support code folding)
+### CLM Technical Limitations
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Code folding | Not supported | `Open/Close Statement Blocks` do not enable folding in CLMs |
+| Heading folding | Not supported | `BBLMFunctionScannerDoesFoldsToo` only works in compiled modules |
+| Custom run colors | Not supported | `BBLMRunColors` is ignored in CLMs |
+| Separate marker/text colors | Not supported | Cannot color `*` differently from heading text |
+| Level numbers in navigator | Not supported | CLMs cannot transform text, only capture it |
+
+### Org Mode Features Not Supported
+
+These features require Emacs or a dedicated Org Mode application:
+
 - Interactive TODO state cycling
 - Agenda views
 - Babel code execution
 - Table calculations
+- Link following
+- Date/time scheduling
 
-For full Org Mode functionality, use Emacs or a dedicated Org Mode application.
+### What Works
+
+Despite the limitations, this CLM provides useful functionality:
+
+- Syntax highlighting for all major Org elements
+- Function navigator for quick heading navigation
+- Comment/uncomment support
+- Spell checking in prose areas
 
 ## License
 

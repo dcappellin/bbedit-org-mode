@@ -7,40 +7,34 @@
     Syntax highlighting for Emacs Org mode files (.org)
 
     Supports:
-    - Headings (* ** *** etc.)
+    - Headings (* ** *** etc.) in function navigator
     - TODO/DONE keywords
-    - Text markup (*bold*, /italic/, _underline_, =verbatim=, ~code~, +strikethrough+)
-    - Links [[link]] and [[link][description]]
-    - Comments (# comment)
     - File keywords (#+TITLE:, #+BEGIN_SRC, etc.)
-    - Property drawers (:PROPERTIES:, :END:)
+    - Links [[link]] and [[link][description]]
     - Timestamps [2024-01-01] and <2024-01-01>
-    - Code blocks
-    - Tables
+    - Comments (# comment)
+    - Property drawers (:PROPERTIES:, :END:)
+    - Verbatim =text= and code ~text~
+
+    Limitations (require compiled module):
+    - No folding for blocks
+    - No separate colors for heading marker vs text
 
     Author: Cappellin Denis with the help of Claude (Anthropic)
     Sources:
     - https://orgmode.org/worg/org-syntax.html
     - https://www.barebones.com/support/develop/clm.html
-
-    Note: Codeless Language Modules have limited styling options compared
-    to compiled modules. Headings cannot have separate colors for the
-    marker (*) and the text - this is a BBEdit CLM limitation.
 -->
 <dict>
-    <!-- Required: Identify this as a Codeless Language Module -->
     <key>BBEditDocumentType</key>
     <string>CodelessLanguageModule</string>
-    
-    <!-- Required: Display name in BBEdit menus -->
+
     <key>BBLMLanguageDisplayName</key>
     <string>Org Mode</string>
-    
-    <!-- Required: Unique 4-character code -->
+
     <key>BBLMLanguageCode</key>
     <string>OrgM</string>
-    
-    <!-- File extension mapping -->
+
     <key>BBLMSuffixMap</key>
     <array>
         <dict>
@@ -48,35 +42,28 @@
             <string>.org</string>
         </dict>
     </array>
-    
-    <!-- Preferred extension when saving -->
+
     <key>BBLMPreferredFilenameExtension</key>
     <string>org</string>
-    
-    <!-- Enable syntax coloring -->
+
     <key>BBLMColorsSyntax</key>
     <true/>
-    
-    <!-- Enable function scanning for headings -->
+
     <key>BBLMScansFunctions</key>
     <true/>
-    
-    <!-- Case insensitive for keywords like TODO, DONE -->
+
     <key>BBLMIsCaseSensitive</key>
     <false/>
-    
-    <!-- Spell check prose (Org is mostly text) -->
+
     <key>BBLMCanSpellCheckCodeRuns</key>
     <true/>
-    
-    <!-- Comment token for Un/Comment Selection -->
+
     <key>BBLMCommentLineDefault</key>
     <string># </string>
-    
-    <!-- Keywords: TODO states, priorities, and common Org keywords -->
+
+    <!-- Keywords: TODO states and priorities -->
     <key>BBLMKeywordList</key>
     <array>
-        <!-- TODO states -->
         <string>TODO</string>
         <string>DONE</string>
         <string>WAITING</string>
@@ -86,25 +73,21 @@
         <string>HOLD</string>
         <string>SOMEDAY</string>
         <string>PROJECT</string>
-        <!-- Timestamps and scheduling -->
         <string>SCHEDULED</string>
         <string>DEADLINE</string>
         <string>CLOSED</string>
         <string>CLOCK</string>
-        <!-- Property keywords -->
         <string>PROPERTIES</string>
         <string>END</string>
         <string>LOGBOOK</string>
-        <!-- Priorities -->
         <string>[#A]</string>
         <string>[#B]</string>
         <string>[#C]</string>
     </array>
-    
+
     <!-- Predefined names: file keywords and block delimiters -->
     <key>BBLMPredefinedNameList</key>
     <array>
-        <!-- File-level keywords -->
         <string>#+TITLE:</string>
         <string>#+AUTHOR:</string>
         <string>#+DATE:</string>
@@ -129,7 +112,6 @@
         <string>#+TAGS:</string>
         <string>#+ARCHIVE:</string>
         <string>#+COLUMNS:</string>
-        <!-- Results and names -->
         <string>#+NAME:</string>
         <string>#+RESULTS:</string>
         <string>#+CAPTION:</string>
@@ -138,13 +120,11 @@
         <string>#+ATTR_ORG:</string>
         <string>#+HEADER:</string>
         <string>#+HEADERS:</string>
-        <!-- Export settings -->
         <string>#+LATEX_CLASS:</string>
         <string>#+LATEX_CLASS_OPTIONS:</string>
         <string>#+LATEX_HEADER:</string>
         <string>#+HTML_HEAD:</string>
         <string>#+HTML_HEAD_EXTRA:</string>
-        <!-- Block delimiters -->
         <string>#+BEGIN_SRC</string>
         <string>#+END_SRC</string>
         <string>#+BEGIN_EXAMPLE</string>
@@ -161,54 +141,39 @@
         <string>#+END_EXPORT</string>
         <string>#+BEGIN_NOTES</string>
         <string>#+END_NOTES</string>
-        <!-- Call -->
         <string>#+CALL:</string>
         <string>#+TBLFM:</string>
     </array>
-    
-    <!-- Language features dictionary -->
+
     <key>Language Features</key>
     <dict>
-        <!-- Characters allowed in identifiers/keywords -->
         <key>Identifier and Keyword Character Class</key>
         <string>A-Za-z0-9_#:+\-\[\]@</string>
-        
-        <!-- Line comments start with # at beginning of line -->
-        <key>Open Line Comments</key>
-        <string>#</string>
-        
-        <!-- Block comments -->
-        <key>Open Block Comments</key>
-        <string>#+BEGIN_COMMENT</string>
-        <key>Close Block Comments</key>
-        <string>#+END_COMMENT</string>
-        
-        <!-- String patterns using regular expressions for better matching -->
-        <!-- Headings are included here to get syntax coloring (CLM limitation) -->
+
+        <!-- String patterns for syntax coloring -->
         <key>String Pattern</key>
         <string><![CDATA[
 (?x:
-    (^\*+\s+.+$)                               |  (?# Headings: * heading, ** subheading, etc.)
-    (\[\[[^\]]+\]\])                           |  (?# Links [[...]] or [[...][...]])
-    (\<[0-9]{4}-[0-9]{2}-[0-9]{2}[^\>]*\>)     |  (?# Active timestamps <2024-01-01>)
-    (\[[0-9]{4}-[0-9]{2}-[0-9]{2}[^\]]*\])     |  (?# Inactive timestamps [2024-01-01])
+    (^\*+\s+.+$)                               |  (?# Headings)
+    (\[\[[^\]]+\]\])                           |  (?# Links [[...]])
+    (\<[0-9]{4}-[0-9]{2}-[0-9]{2}[^\>]*\>)     |  (?# Active timestamps)
+    (\[[0-9]{4}-[0-9]{2}-[0-9]{2}[^\]]*\])     |  (?# Inactive timestamps)
     ((?<=\s|^)=[^\s=][^=]*=(?=\s|$|[.,;:!?]))  |  (?# Verbatim =text=)
     ((?<=\s|^)~[^\s~][^~]*~(?=\s|$|[.,;:!?]))     (?# Code ~text~)
 )
 ]]></string>
-        
-        <!-- Comment pattern -->
+
+        <!-- Comment patterns -->
         <key>Comment Pattern</key>
         <string><![CDATA[
 (?x:
-    (^\#\s.*$)                                       |  (?# Line comments starting with #)
+    (^\#\s.*$)                                       |  (?# Line comments: # ...)
     (^\#\+BEGIN_COMMENT\b[\s\S]*?^\#\+END_COMMENT)   |  (?# Block comments)
-    (:PROPERTIES:[\s\S]*?:END:)                         (?# Property drawers as "comments")
+    (:PROPERTIES:[\s\S]*?:END:)                         (?# Property drawers)
 )
 ]]></string>
-        
-        <!-- Function pattern to recognize headings for navigation -->
-        <!-- Only 'function' and 'function_name' groups are supported in CLMs -->
+
+        <!-- Function pattern for heading navigation -->
         <key>Function Pattern</key>
         <string><![CDATA[
 (?x:
@@ -217,8 +182,7 @@
     )
 )
 ]]></string>
-        
-        <!-- Skip pattern to avoid false matches in strings/comments -->
+
         <key>Skip Pattern</key>
         <string><![CDATA[
 (?x:
@@ -226,8 +190,6 @@
     (?P>string)
 )
 ]]></string>
-        
     </dict>
-
 </dict>
 </plist>
