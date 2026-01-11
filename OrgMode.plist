@@ -5,7 +5,7 @@
 <!--
     Org Mode - BBEdit Codeless Language Module
     Syntax highlighting for Emacs Org mode files (.org)
-    
+
     Supports:
     - Headings (* ** *** etc.)
     - TODO/DONE keywords
@@ -17,11 +17,15 @@
     - Timestamps [2024-01-01] and <2024-01-01>
     - Code blocks
     - Tables
-    
-    Author: Created with Claude (Anthropic)
-    Sources: 
+
+    Author: Cappellin Denis with the help of Claude (Anthropic)
+    Sources:
     - https://orgmode.org/worg/org-syntax.html
     - https://www.barebones.com/support/develop/clm.html
+
+    Note: Codeless Language Modules have limited styling options compared
+    to compiled modules. Headings cannot have separate colors for the
+    marker (*) and the text - this is a BBEdit CLM limitation.
 -->
 <dict>
     <!-- Required: Identify this as a Codeless Language Module -->
@@ -180,9 +184,11 @@
         <string>#+END_COMMENT</string>
         
         <!-- String patterns using regular expressions for better matching -->
+        <!-- Headings are included here to get syntax coloring (CLM limitation) -->
         <key>String Pattern</key>
         <string><![CDATA[
 (?x:
+    (^\*+\s+.+$)                               |  (?# Headings: * heading, ** subheading, etc.)
     (\[\[[^\]]+\]\])                           |  (?# Links [[...]] or [[...][...]])
     (\<[0-9]{4}-[0-9]{2}-[0-9]{2}[^\>]*\>)     |  (?# Active timestamps <2024-01-01>)
     (\[[0-9]{4}-[0-9]{2}-[0-9]{2}[^\]]*\])     |  (?# Inactive timestamps [2024-01-01])
@@ -202,6 +208,7 @@
 ]]></string>
         
         <!-- Function pattern to recognize headings for navigation -->
+        <!-- Only 'function' and 'function_name' groups are supported in CLMs -->
         <key>Function Pattern</key>
         <string><![CDATA[
 (?x:
@@ -221,6 +228,6 @@
 ]]></string>
         
     </dict>
-    
+
 </dict>
 </plist>
