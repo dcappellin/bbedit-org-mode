@@ -1,0 +1,323 @@
+#+TITLE: Org Mode Syntax Test File
+#+AUTHOR: Test User
+#+DATE: 2024-01-15
+#+EMAIL: test@example.com
+#+DESCRIPTION: A comprehensive test file for BBEdit Org Mode syntax highlighting
+#+KEYWORDS: org-mode, test, bbedit, syntax
+#+LANGUAGE: en
+#+OPTIONS: toc:2 num:t
+#+STARTUP: showall
+#+FILETAGS: :test:syntax:bbedit:
+#+CATEGORY: Testing
+#+TODO: TODO NEXT WAITING | DONE CANCELLED
+
+# This is a line comment - should be colored as a comment
+# Another comment line for testing
+
+* Introduction
+  This is a first-level heading. It should appear in the function navigator.
+
+  Regular paragraph text goes here. This is just normal prose that should
+  be spell-checked by BBEdit.
+
+** Getting Started
+   This is a second-level heading with some regular text.
+
+   Here we test *bold text*, /italic text/, _underlined text_,
+   =verbatim text=, ~inline code~, and +strikethrough text+.
+
+   You can also combine them: */bold and italic/*.
+
+*** Detailed Instructions
+    Third-level heading for more detail.
+
+**** Even Deeper Nesting
+     Fourth-level heading to test deep nesting.
+
+* TODO Tasks and States
+  Testing various TODO keywords and states.
+
+** TODO Write documentation
+   This task is not yet started.
+
+** NEXT Review pull request
+   This task is up next.
+
+** WAITING Feedback from team
+   Waiting for external input.
+
+** DONE Complete the first draft
+   CLOSED: [2024-01-10 Wed 14:30]
+   This task has been completed.
+
+** CANCELLED Old feature request
+   CLOSED: [2024-01-08 Mon 09:00]
+   This was cancelled due to changing requirements.
+
+** HOLD Low priority item
+   On hold for now.
+
+** SOMEDAY Learn a new language
+   Maybe someday.
+
+** PROJECT Website Redesign
+   A larger project to track.
+
+* Priorities and Scheduling
+
+** TODO [#A] High priority task
+   DEADLINE: <2024-01-20 Sat>
+   This is an urgent task with high priority.
+
+** TODO [#B] Medium priority task
+   SCHEDULED: <2024-01-18 Thu>
+   Regular priority, scheduled for later.
+
+** TODO [#C] Low priority task
+   Can be done whenever there is time.
+
+* Timestamps and Dates
+
+  Active timestamps appear like this: <2024-01-15 Mon>
+
+  With time: <2024-01-15 Mon 10:00>
+
+  Time range: <2024-01-15 Mon 10:00-12:00>
+
+  Inactive timestamps: [2024-01-15 Mon]
+
+  Date range: <2024-01-15 Mon>--<2024-01-20 Sat>
+
+  Repeating: <2024-01-15 Mon +1w>
+
+* Links and References
+
+  Simple link: [[https://orgmode.org]]
+
+  Link with description: [[https://orgmode.org][Org Mode Homepage]]
+
+  File link: [[file:./other-document.org]]
+
+  File link with description: [[file:./notes.org][My Notes]]
+
+  Internal link: [[*Introduction]]
+
+  Custom ID link: [[#custom-id]]
+
+* Properties and Drawers
+
+** Task with Properties
+   :PROPERTIES:
+   :CREATED:  [2024-01-01 Mon]
+   :ID:       unique-id-12345
+   :CATEGORY: work
+   :CUSTOM_ID: custom-id
+   :END:
+
+   This heading has a property drawer.
+
+** Task with Logbook
+   :LOGBOOK:
+   CLOCK: [2024-01-14 Sun 10:00]--[2024-01-14 Sun 11:30] =>  1:30
+   CLOCK: [2024-01-13 Sat 14:00]--[2024-01-13 Sat 16:00] =>  2:00
+   :END:
+
+   This task has time tracking information.
+
+* Code Blocks
+
+  Here is a Python code block:
+
+#+BEGIN_SRC python
+def hello_world():
+    """A simple function."""
+    print("Hello, World!")
+    return True
+
+if __name__ == "__main__":
+    hello_world()
+#+END_SRC
+
+  Here is a shell script:
+
+#+NAME: example-script
+#+BEGIN_SRC bash :results output
+echo "Testing Org Mode"
+ls -la
+date
+#+END_SRC
+
+#+RESULTS: example-script
+: Testing Org Mode
+
+  Inline source code reference: src_python{print("inline")}
+
+* Tables
+
+| Name    | Age | City      |
+|---------+-----+-----------|
+| Alice   |  28 | New York  |
+| Bob     |  35 | London    |
+| Charlie |  42 | Tokyo     |
+|---------+-----+-----------|
+| Total   | 105 |           |
+
+#+TBLFM: @5$2=vsum(@2$2..@4$2)
+
+  Another table with alignment:
+
+|   Right | Center | Left   |
+|--------:+:------:+--------|
+|     100 |  Yes   | First  |
+|    2000 |   No   | Second |
+|   30000 | Maybe  | Third  |
+
+* Quotes and Examples
+
+#+BEGIN_QUOTE
+This is a block quote. It can contain multiple lines
+and is often used for citing other sources or
+highlighting important passages.
+
+-- Famous Author
+#+END_QUOTE
+
+#+BEGIN_EXAMPLE
+This is an example block.
+It preserves formatting exactly as written.
+  Indentation is preserved.
+    Even deeper indentation.
+#+END_EXAMPLE
+
+#+BEGIN_VERSE
+This is verse format
+  for poetry and songs
+    where whitespace matters
+      and lines flow along
+#+END_VERSE
+
+#+BEGIN_CENTER
+This text will be centered
+when exported to various formats.
+#+END_CENTER
+
+* Export Settings
+
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [12pt,a4paper]
+#+LATEX_HEADER: \usepackage{geometry}
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css"/>
+#+HTML_HEAD_EXTRA: <meta name="viewport" content="width=device-width">
+
+#+CAPTION: A sample figure
+#+ATTR_HTML: :width 500px :alt Sample image
+#+ATTR_LATEX: :width 0.8\textwidth
+[[file:images/sample.png]]
+
+* Comment Blocks
+
+#+BEGIN_COMMENT
+This entire block is a comment.
+It will not be exported.
+You can put notes and drafts here.
+
+TODO: Review this section later
+#+END_COMMENT
+
+* Notes and Export Blocks
+
+#+BEGIN_NOTES
+These are speaker notes for presentations.
+They typically don't appear in the main export.
+#+END_NOTES
+
+#+BEGIN_EXPORT html
+<div class="custom-html">
+  <p>Raw HTML that will be included in HTML export.</p>
+</div>
+#+END_EXPORT
+
+* Lists
+
+** Unordered Lists
+   - First item
+   - Second item
+     - Nested item
+     - Another nested item
+   - Third item
+
+** Ordered Lists
+   1. First step
+   2. Second step
+      1. Sub-step A
+      2. Sub-step B
+   3. Third step
+
+** Definition Lists
+   - Term 1 :: Definition of term one
+   - Term 2 :: Definition of term two
+   - Term 3 :: A longer definition that might
+     span multiple lines
+
+** Checkbox Lists
+   - [ ] Unchecked item
+   - [X] Checked item
+   - [-] Partially done item
+
+* Include and Macros
+
+#+INCLUDE: "./header.org" :minlevel 2
+#+MACRO: version 1.0.0
+#+MACRO: author Test User
+
+  The current version is {{{version}}} by {{{author}}}.
+
+#+CALL: example-script()
+
+* Tags and Categories                                              :important:
+
+** Work Tasks                                                          :work:
+   Tasks related to work.
+
+** Personal Tasks                                              :personal:home:
+   Tasks for personal life.
+
+** Urgent Items                                               :urgent:priority:
+   Items that need immediate attention.
+
+* Footnotes
+
+  This paragraph has a footnote reference[fn:1] and another one[fn:note].
+
+  You can also use inline footnotes[fn:: This is an inline footnote.].
+
+[fn:1] This is the first footnote.
+
+[fn:note] This is a named footnote with more details.
+
+* Special Characters and Entities
+
+  Org mode supports special characters: \alpha \beta \gamma
+
+  Arrows: \rarr \larr \uarr \darr
+
+  Other symbols: \copy \reg \trade \deg \pm
+
+* Horizontal Rules
+
+  Text before the rule.
+
+-----
+
+  Text after the rule.
+
+* Final Notes
+
+  This file tests most Org Mode syntax constructs supported by the
+  BBEdit Codeless Language Module. Open this file in BBEdit to verify
+  that syntax highlighting works correctly.
+
+  Check the function navigator (the popup at the top of the window)
+  to see if all headings are properly indexed.
+
+# End of test file
