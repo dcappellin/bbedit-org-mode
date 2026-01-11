@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mdfind:*)",
+      "Bash(plutil:*)",
+      "WebFetch(domain:www.barebones.com)"
+    ]
+  }
+}
